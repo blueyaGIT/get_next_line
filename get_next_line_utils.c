@@ -6,11 +6,20 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:57:41 by dalbano           #+#    #+#             */
-/*   Updated: 2024/10/14 10:48:43 by dalbano          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:38:04 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	ft_free_content(char **ptr)
+{
+	if (*ptr && ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -21,20 +30,6 @@ size_t	ft_strlen(const char *s)
 		len++;
 	return (len);
 }
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if (c == '\0')
-		return ((char *)s);
-	return (NULL);
-}
-
 
 char	*ft_strdup(const char *s1)
 {
@@ -76,4 +71,15 @@ char	*ft_strjoin(char *s1, const char *s2)
 		joined[len1 + temp2] = s2[temp2];
 	joined[len1 + len2] = '\0';
 	return (joined);
+}
+
+int	ft_is_newline(const char *str)
+{
+	int	temp;
+
+	temp = -1;
+	while (str[++temp])
+		if (str[temp] == '\n')
+			return (1);
+	return (0);
 }

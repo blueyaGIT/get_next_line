@@ -6,78 +6,91 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:53:13 by dalbano           #+#    #+#             */
-/*   Updated: 2024/10/14 10:47:26 by dalbano          ###   ########.fr       */
+/*   Updated: 2024/10/20 10:41:04 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*extract_line(char **storage)
+char	*ft_next_line(const char *str)
 {
-	char	*newline_pos;
-	char	*line;
-	char	*remaining;
 
-	newline_pos = ft_strchr(*storage, '\n');
-	if (!newline_pos)
-	{
-		line = ft_strdup(*storage);
-		free(*storage);
-		*storage = NULL;
-		return (line);
-	}
-	line = ft_strndup(*storage, newline_pos - *storage + 1);
-	remaining = ft_strdup(newline_pos + 1);
-	free(*storage);
-	*storage = remaining;
-	return (line);
 }
 
-static int	read_and_store(int fd, char **storage)
+char	*ft_switch_line(char **temp, char **storage)
 {
-	char	buffer[BUFFER_SIZE + 1];
-	ssize_t	bytes_read;
-	char	*temp;
+	char	*curr_line;
 
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	while (bytes_read > 0)
+	*temp = ft_strdup(*storage);
+	ft_free_content(storage, 0, 0);
+	*storage = ft_next_line(*temp);
+	curr_line = ft_old_line(*temp);
+	ft_free_content(temp, 0, 0);
+	return (curr_line);
+}
+
+void	ft_read_curr_line(int fd, char **storage, char **temp)
+{
+	char	*buffer;
+	int		i_temp;
+
+	buffer = malloc(sizeof(buffer) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return ;
+	i_temp = 0;
+	while (++i_temp > 0)
 	{
-		buffer[bytes_read] = '\0';
-		temp = ft_strjoin(*storage, buffer);
-		free(*storage);
-		*storage = temp;
-		if (ft_strchr(buffer, '\n'))
+		i_temp = read(fd, buffer, BUFFER_SIZE);
+		if (i_temp < 0)
+		{
+			ft_free_content(storage, buffer, i_temp);
+			return ;
+		}
+		buffer[i_temp] = '\0';
+		*temp = ft_strdup(*storage);
+		ft_free_content(storage, 0, 0);
+		*storage = ft_strjoin(*storage, buffer);
+		ft_free_content(temp, 0, 0);
+		if (ft_is_newline(*storage))
 			break ;
 	}
-	return (bytes_read);
+	ft_free_content(&buffer, 0, 0);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*storage;
-	int			result;
+	char		*curr_line;
+	char		*temp;
 
 	storage = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	result = read_and_store(fd, &storage);
-	if (result < 0 || (result == 0 && !storage))
-		return (NULL);
-	return (extract_line(&storage));
+	ft_read_curr_line(fd, &storage, &temp);
+	if (storage != '\0' && storage != NULL)
+		curr_line = ft_switch_line(&temp, &storage);
+	if (curr_line == NULL || *curr_line == '\0')
+	{
+		ft_free_content(*temp, &curr_line, &storage);
+	}
+	return (curr_line);
 }
 
-#include <fcntl.h>
 #include <stdio.h>
-#include "get_next_line.h"
 
-int main() {
-    int fd = open("example.txt", O_RDONLY);
-    char *line;
+int	main(int argc, char **argv)
+{
+	int	fd;
+	char	*line;
 
-    while ((line = get_next_line(fd)) != NULL) {
-        printf("%s", line);
-        free(line);
-    }
-    close(fd);
-    return 0;
+	(void)argc;
+	fd = open(argv[1], O_RDONLY);
+	line = "";
+	while (line != NULL)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+	}
+	fd = close(fd);
+	return (0);
 }
