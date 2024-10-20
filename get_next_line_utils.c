@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:57:41 by dalbano           #+#    #+#             */
-/*   Updated: 2024/10/14 10:48:43 by dalbano          ###   ########.fr       */
+/*   Updated: 2024/10/20 11:35:10 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,24 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-
 char	*ft_strdup(const char *s1)
 {
 	size_t	len;
 	size_t	temp;
 	char	*copy;
 
-	temp = -1;
+	if (!s1)
+		return (NULL);
+	temp = 0;
 	len = ft_strlen(s1);
 	copy = (char *)malloc(len + 1);
 	if (!copy)
 		return (NULL);
-	while (++temp < len)
+	while (temp < len)
+	{
 		copy[temp] = s1[temp];
+		temp++;
+	}
 	copy[len] = '\0';
 	return (copy);
 }
@@ -61,12 +65,12 @@ char	*ft_strjoin(char *s1, const char *s2)
 	size_t	temp2;
 	char	*joined;
 
+	if (!s1 || !s2)
+		return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	temp1 = -1;
 	temp2 = -1;
-	if (!s1 || !s2)
-		return (NULL);
 	joined = (char *)malloc(len1 + len2 + 1);
 	if (!joined)
 		return (NULL);
@@ -76,4 +80,25 @@ char	*ft_strjoin(char *s1, const char *s2)
 		joined[len1 + temp2] = s2[temp2];
 	joined[len1 + len2] = '\0';
 	return (joined);
+}
+
+char	*ft_strndup(const char *s, size_t n)
+{
+	size_t	temp;
+	size_t	len;
+	char	*copy;
+
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	if (n > len)
+		n = len;
+	copy = (char *)malloc(n + 1);
+	if (!copy)
+		return (NULL);
+	temp = -1;
+	while (++temp < n)
+		copy[temp] = s[temp];
+	copy[n] = '\0';
+	return (copy);
 }
