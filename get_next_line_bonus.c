@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:53:13 by dalbano           #+#    #+#             */
-/*   Updated: 2024/10/20 12:16:53 by dalbano          ###   ########.fr       */
+/*   Updated: 2024/10/20 12:19:39 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*extract_line(char **storage)
 {
@@ -67,19 +67,19 @@ int	read_and_store(int fd, char **storage)
 
 char	*get_next_line(int fd)
 {
-	static char	*storage = NULL;
+	static char	*storage[1024];
 	int			result;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	result = read_and_store(fd, &storage);
-	if (result < 0 || (result == 0 && (!storage || !*storage)))
+	result = read_and_store(fd, &storage[fd]);
+	if (result < 0 || (result == 0 && !*storage[fd]))
 	{
-		free(storage);
-		storage = NULL;
+		free(storage[fd]);
+		storage[fd] = NULL;
 		return (NULL);
 	}
-	return (extract_line(&storage));
+	return (extract_line(&storage[fd]));
 }
 
 // #include <stdio.h>
