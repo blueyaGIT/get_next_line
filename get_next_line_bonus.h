@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 14:56:44 by dalbano           #+#    #+#             */
-/*   Updated: 2024/10/20 12:14:51 by dalbano          ###   ########.fr       */
+/*   Updated: 2024/10/22 19:46:47 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE BUFFER
+#  define BUFFER_SIZE
 # endif
 
 /* ---------- GNL ------------ */
