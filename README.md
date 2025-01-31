@@ -63,7 +63,6 @@ int main(void)
 - `get_next_line.c` - Contains the `get_next_line()` function implementation.
 - `get_next_line.h` - Header file with function prototypes and necessary includes.
 - `get_next_line_utils.c` - Utility functions used by `get_next_line()`.
-- `main.c` - Example program to test `get_next_line()`.
 
 ## Function Description
 
