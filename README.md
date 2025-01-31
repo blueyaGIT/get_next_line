@@ -1,8 +1,7 @@
 <a href="https://github.com/blueyaGIT/get_next_line"><img src="https://github.com/blueyaGIT/blueyaGIT/blob/b34a5a4e10b9019609659eaa0541a4325db88ca5/covers/cover-get_next_line-bonus.png" alt="libft"></a>
 ###
 
-<div align="center">
-`get_next_line` is a function that reads a file line by line. It is useful for processing files that need to be read incrementally rather than loading the entire content into memory. This function is implemented as part of the 42 School curriculum.</div>
+`get_next_line` is a function that reads a file line by line. It is useful for processing files that need to be read incrementally rather than loading the entire content into memory. This function is implemented as part of the 42 School curriculum.
 
 ## Usage
 
