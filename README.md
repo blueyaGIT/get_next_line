@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/blueyaGIT/blueyaGIT/blob/master/covers/cover-get_next_line-bonus.png?raw=true" alt="get_next_line"/>
+  <img src="https://github.com/blueyaGIT/blueyaGIT/blob/master/42_badges/get_next_linem.png?raw=true" alt="get_next_line"/>
 </p>
 
 <p align="center">
