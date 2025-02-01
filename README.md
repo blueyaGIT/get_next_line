@@ -6,6 +6,7 @@
   Score: <i>125/100</i><br>
   Finished: <i>24.10.2024</i><br>
 </p>
+
 ###
 
 `get_next_line` is a function that reads a file line by line. It is useful for processing files that need to be read incrementally rather than loading the entire content into memory. This function is implemented as part of the 42 School curriculum.
