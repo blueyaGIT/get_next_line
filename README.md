@@ -97,3 +97,10 @@ gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line_bonus.c get_next_line_
 
 For more details, refer to the project documentation or the `42` subject PDF.
 
+## 🚀 Next Project
+
+<a href="https://github.com/blueyaGIT/minitalk"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=minitalk"></a>
+
+## ⏳ Previous Project
+
+<a href="https://github.com/blueyaGIT/printf"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=ft_printf"></a>
